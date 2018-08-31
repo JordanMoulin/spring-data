@@ -1,10 +1,12 @@
 package com.formation.user;
 
 import java.text.MessageFormat;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.formation.service.Feedback;
 import com.formation.service.IFeedback;
 
 /**
@@ -12,43 +14,36 @@ import com.formation.service.IFeedback;
  */
 @Component
 public class UserInteraction {
-	private IFeedback feedback;
-
-	public UserInteraction() {
-	}
-
-	/**
-	 * To say hello to the user named <code>name</code>
-	 *
-	 * @param name
-	 */
-	public void sayHello(String name) {
-		feedback.say(MessageFormat.format("Hello {0} !", name));
-	}
-
-	/**
-	 * To say goodbye to the user named <code>name</code>
-	 *
-	 * @param name
-	 */
-	public void sayGoodBye(String name) {
-		feedback.say(MessageFormat.format("Goodbye {0} !", name));
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int sayTheCaptainAgeForAFamousThreeMast() {
-		return feedback.giveMeTheCaptainAge(10, 3);
-	}
 
 	@Autowired
-	/**
-	 * 
-	 * @param feedback
-	 */
-	public void setFeedback(IFeedback feedback) {
-		this.feedback = feedback;
+	private IFeedback feedbackService;
+
+	public void sayHello(String user) {
+		feedbackService.say(new Feedback(1, user, MessageFormat.format("Hello {0} !", user)));
 	}
+
+	public void sayGoodBye(String user) {
+		feedbackService.say(new Feedback(2, user, MessageFormat.format("Goodbye {0} !", user)));
+	}
+
+	// met à jour un bonjour existant par le message "Big Up !"
+	public void makeABetterHelloTo(String user) {
+
+	}
+
+	// Supprime tous les feedbacks avec un utilisateur
+	public void deleteFeedbackWith(String user) {
+
+	}
+
+	// Récupère tous les feedbacks du jour pour un user
+	public List<Feedback> listWhatWasSaidToHimToday(String user) {
+
+		return null;
+	}
+
+	public void setFeedbackService(IFeedback feedbackService) {
+		this.feedbackService = feedbackService;
+	}
+
 }
