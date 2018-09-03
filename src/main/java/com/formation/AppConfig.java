@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import com.formation.service.MessageToDatabaseService;
 import com.formation.service.MessageService;
+import com.formation.service.MessageToDatabaseService;
 import com.formation.user.ChatConsole;
 
 import database.ConnexionBdd;
@@ -31,7 +31,7 @@ public class AppConfig {
 	}
 
 	@Bean
-	public ChatConsole UserInteraction() {
+	public ChatConsole getChatConsole() {
 		return new ChatConsole();
 	}
 
