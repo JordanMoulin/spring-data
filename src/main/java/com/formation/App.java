@@ -9,11 +9,19 @@ public class App {
 	public static void main(String[] args) {
 		String toUser = "Clement";
 		String currentUser = "Jordan";
+		String content = "blabla blo";
 
 		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
 		ChatConsole interaction = applicationContext.getBean(ChatConsole.class);
 		interaction.setCurrentUser(currentUser);
+
+		interaction.deleteMessageToUser(toUser);
+
 		interaction.sendHelloTo(toUser);
 		interaction.sendGoodbyeTo(toUser);
+
+		// interaction.editMessage(content, 2);
+
+		interaction.findMessageToUserToday(toUser);
 	}
 }

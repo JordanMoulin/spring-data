@@ -13,6 +13,12 @@ public class Message {
 
 	}
 
+	public Message(int id, String content) {
+		this.id = id;
+		this.content = content;
+		this.eventTime = LocalDateTime.now();
+	}
+
 	public Message(int id, String fromUser, String toUser, String content) {
 		super();
 		this.id = id;
@@ -20,6 +26,12 @@ public class Message {
 		this.toUser = toUser;
 		this.content = content;
 		this.eventTime = LocalDateTime.now();
+	}
+
+	@Override
+	public String toString() {
+		return "Message [id=" + id + ", fromUser=" + fromUser + ", toUser=" + toUser + ", content=" + content
+				+ ", eventTime=" + eventTime + "]";
 	}
 
 	public int getId() {
@@ -61,5 +73,4 @@ public class Message {
 	public void setEventTime(LocalDateTime eventTime) {
 		this.eventTime = eventTime;
 	}
-
 }

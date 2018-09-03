@@ -1,6 +1,7 @@
 package com.formation.user;
 
 import java.text.MessageFormat;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,16 @@ public class ChatConsole {
 		feedbackService.send(new Message(2, currentUser, toUser, MessageFormat.format("Goodbye {0} !", toUser)));
 	}
 
-	// met à jour un bonjour existant par le message "Big Up !"
 	public void editMessage(String content, Integer idMessage) {
-
+		feedbackService.edit(new Message(idMessage, content));
 	}
 
-	// Supprime tous les feedbacks avec un utilisateur
 	public void deleteMessageToUser(String toUser) {
-
+		feedbackService.delete(currentUser, toUser);
 	}
 
-	// Récupère tous les feedbacks du jour pour un user
 	public List<Message> findMessageToUserToday(String toUser) {
-
-		return null;
+		return feedbackService.findMessageSendToAUserADay(toUser, LocalDate.now());
 	}
 
 	public void setFeedbackService(MessageService feedbackService) {

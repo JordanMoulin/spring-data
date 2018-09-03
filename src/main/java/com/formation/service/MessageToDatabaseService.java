@@ -21,35 +21,45 @@ public class MessageToDatabaseService implements MessageService {
 	@Override
 	// modifier le message dans la bdd
 	public void edit(Message editedMsg) {
-		// TODO Auto-generated method stub
-
+		this.jdbc.update("update message set content = ?, event_time = ? where id = ?", editedMsg.getContent(),
+				editedMsg.getEventTime(), editedMsg.getId());
 	}
 
 	@Override
 	// supprimer le message dans la bdd
-	public void delete(String fromUser, String toUserc) {
-		// TODO Auto-generated method stub
+	public void delete(String fromUser, String toUser) {
+		this.jdbc.update("delete from message where fromUser = ? and toUser = ?", fromUser, toUser);
 
 	}
 
 	@Override
 	public List<Message> findAllMessages() {
-		// List<Feedback> feedbacks = jdbc.query("Select * From feedback",
-		// rowMapper)
-		// this.jdbc.queryForObject("Select * From feedback", Feedback.class);
-		return null;
+		String SQL = "select * from message";
+		List<Message> messages = jdbc.query(SQL, new MessageMapper<>());
+		messages.forEach(e -> {
+			System.out.println("object : " + e);
+		});
+		return messages;
 	}
 
 	@Override
 	public List<Message> findMessageSendToAUserADay(String toUser, LocalDate day) {
-		// TODO Auto-generated method stub
-		return null;
+		String SQL = "select * from message where toUser = ? and DATE(event_time) = ?";
+		List<Message> messages = jdbc.query(SQL, new Object[] { toUser, day }, new MessageMapper<>());
+		messages.forEach(e -> {
+			System.out.println("object : " + e);
+		});
+		return messages;
 	}
 
 	@Override
 	public List<Message> findAllMessageFromUser(String fromUser) {
-		// TODO Auto-generated method stub
-		return null;
+		String SQL = "select * from message where fromUser = ?";
+		List<Message> messages = jdbc.query(SQL, new Object[] { fromUser }, new MessageMapper<>());
+		messages.forEach(e -> {
+			System.out.println("object : " + e);
+		});
+		return messages;
 	}
 
 	public JdbcTemplate getJdbc() {
