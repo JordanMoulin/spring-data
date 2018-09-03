@@ -1,6 +1,7 @@
 package com.formation.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,9 @@ public class MessageToDatabaseService implements MessageService {
 
 	@Override
 	public List<Message> findMessageSendToAUserADay(String toUser, LocalDate day) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		String SQL = "select * from message where toUser = ? and DATE(event_time) = ?";
-		List<Message> messages = jdbc.query(SQL, new Object[] { toUser, day }, new MessageMapper<>());
+		List<Message> messages = jdbc.query(SQL, new Object[] { toUser, formatter.format(day) }, new MessageMapper<>());
 		messages.forEach(e -> {
 			System.out.println("object : " + e);
 		});
