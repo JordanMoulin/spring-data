@@ -14,7 +14,7 @@ qui permettront d'avoir le contexte Spring correct dans nos test*/
  * Junit à Spring pour la gestion du cycle de vie et donc l'injection des beans
  */
 @RunWith(SpringRunner.class)
-public class UserInteractionTest {
+public class ChatConsoleTest {
 	// @Autowired
 	// private UserInteraction interaction;
 	//

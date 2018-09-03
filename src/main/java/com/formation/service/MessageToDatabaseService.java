@@ -6,33 +6,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class FeedbackToDatabaseService implements IFeedback {
+public class MessageToDatabaseService implements MessageService {
 	@Autowired
 	private JdbcTemplate jdbc;
 
 	@Override
 	// ecrire le message dans la bdd
-	public void say(Feedback newFeedback) {
-		this.jdbc.update("insert into feedback (id, user, message, event_time) values (?,?,?,?)", newFeedback.getId(),
-				newFeedback.getUser(), newFeedback.getMessage(), newFeedback.getEvent_time());
+	public void send(Message message) {
+		this.jdbc.update("insert into message (id, fromUser, toUser, content, event_time) values (?,?,?,?,?)",
+				message.getId(), message.getFromUser(), message.getToUser(), message.getContent(),
+				message.getEventTime());
 	}
 
 	@Override
 	// modifier le message dans la bdd
-	public void amend(Feedback updatedFeedback) {
+	public void edit(Message editedMsg) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	// supprimer le message dans la bdd
-	public void unSayTo(String user) {
+	public void delete(String fromUser, String toUserc) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public List<Feedback> tellMeAll() {
+	public List<Message> findAllMessages() {
 		// List<Feedback> feedbacks = jdbc.query("Select * From feedback",
 		// rowMapper)
 		// this.jdbc.queryForObject("Select * From feedback", Feedback.class);
@@ -40,13 +41,13 @@ public class FeedbackToDatabaseService implements IFeedback {
 	}
 
 	@Override
-	public List<Feedback> tellMeWhatWasSaidToHimThisDay(String user, LocalDate day) {
+	public List<Message> findMessageSendToAUserADay(String toUser, LocalDate day) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Feedback> listAllFeedbackWith(String user) {
+	public List<Message> findAllMessageFromUser(String fromUser) {
 		// TODO Auto-generated method stub
 		return null;
 	}
