@@ -2,40 +2,22 @@ package com.formation.service;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "message")
-public class Message {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
+public class MessageDto {
 	private String fromUser;
-	@Column
 	private String toUser;
-	@Column
 	private String content;
-	@Column(name = "event_time")
 	private LocalDateTime eventTime;
 
-	public Message() {
+	public MessageDto() {
 
 	}
 
-	public Message(int id, String content) {
-		this.id = id;
+	public MessageDto(String content) {
 		this.content = content;
 		this.eventTime = LocalDateTime.now();
 	}
 
-	public Message(String fromUser, String toUser, String content) {
+	public MessageDto(String fromUser, String toUser, String content) {
 		super();
 		this.fromUser = fromUser;
 		this.toUser = toUser;
@@ -46,14 +28,6 @@ public class Message {
 	@Override
 	public String toString() {
 		return eventTime + " , fromUser= " + fromUser + ", toUser= " + toUser + ", content= " + content;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getFromUser() {

@@ -7,7 +7,7 @@ import com.formation.user.ChatConsole;
 
 public class App {
 	public static void main(String[] args) {
-		String toUser = "Clement";
+		String toUser = "toto";
 		String currentUser = "Jordan";
 		String content = "blabla blo";
 
@@ -15,13 +15,14 @@ public class App {
 		ChatConsole interaction = applicationContext.getBean(ChatConsole.class);
 		interaction.setCurrentUser(currentUser);
 
-		interaction.deleteMessageToUser(toUser);
-
-		interaction.sendHelloTo(toUser);
-		interaction.sendGoodbyeTo(toUser);
-
+		interaction.findAllMessages();
+		// interaction.deleteMessageToUser(toUser);
+		//
+		// interaction.sendHelloTo(toUser);
+		// interaction.sendGoodbyeTo(toUser);
+		//
 		// interaction.editMessage(content, 2);
-
-		interaction.findMessageToUserToday(toUser);
+		//
+		// interaction.findMessageToUserToday(toUser);
 	}
 }
