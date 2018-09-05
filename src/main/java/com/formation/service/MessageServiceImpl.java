@@ -46,8 +46,13 @@ public class MessageServiceImpl implements MessageService {
 
 	@Override
 	public List<MessageDto> findMessageSendToAUserADay(String toUser, LocalDate day) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Message> messages = repo.findByToUserAndEventTimeBetween(toUser, day, LocalDate.now());
+		List<MessageDto> messagesDto = new ArrayList<MessageDto>();
+		for (Message message : messages) {
+			messagesDto.add(fromMessageToMessageDto(message));
+			System.out.println(fromMessageToMessageDto(message));
+		}
+		return messagesDto;
 	}
 
 	@Override
@@ -56,10 +61,17 @@ public class MessageServiceImpl implements MessageService {
 		List<MessageDto> messagesDto = new ArrayList<MessageDto>();
 		for (Message message : messages) {
 			messagesDto.add(fromMessageToMessageDto(message));
+			System.out.println(fromMessageToMessageDto(message));
 		}
 		return messagesDto;
 	}
 
+	/**
+	 * Transforme un Message en MessageDto
+	 * 
+	 * @param message
+	 * @return MessageDto
+	 */
 	public MessageDto fromMessageToMessageDto(Message message) {
 		MessageDto newMessageDto = new MessageDto();
 		newMessageDto.setFromUser(message.getFromUser());

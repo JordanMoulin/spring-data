@@ -44,8 +44,8 @@ public class ChatConsole {
 		return messageService.findAllMessageFromUser("sam");
 	}
 
-	public List<MessageDto> findMessageToUserToday(String toUser) {
-		return messageService.findMessageSendToAUserADay(toUser, LocalDate.now());
+	public List<MessageDto> findMessageToUserToday(String toUser, LocalDate date) {
+		return messageService.findMessageSendToAUserADay(toUser, date);
 	}
 
 	public void setFeedbackService(MessageService feedbackService) {
